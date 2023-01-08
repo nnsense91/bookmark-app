@@ -23,8 +23,13 @@ const loginWithEmail = async (email: string, password: string) => {
 };
 
 const logout = async () => {
-  console.log('firebase logout');
-  await signOut(auth);
+  try {
+    await signOut(auth);
+
+    return true;
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 export { auth, loginWithEmail, logout };

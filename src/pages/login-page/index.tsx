@@ -9,7 +9,7 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const fromPage = location.state?.from?.pathname || '/';
 
-  const { user, signIn, signOut } = useContext(auth.AuthProvider);
+  const { user, signIn } = useContext(auth.AuthProvider);
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -45,7 +45,6 @@ export const LoginPage = () => {
         />
         <button type='submit'>Login</button>
       </form>
-      <button onClick={signOut}>Exit</button>
     </div>
   );
 };

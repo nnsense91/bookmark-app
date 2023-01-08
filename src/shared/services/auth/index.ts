@@ -22,7 +22,13 @@ const useAuth = () => {
     }
   };
 
-  const signOut = () => logout();
+  const signOut = async () => {
+    const success = await logout();
+
+    if (success) {
+      setUser(null);
+    }
+  };
 
   return {
     user,

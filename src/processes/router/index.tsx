@@ -6,19 +6,17 @@ import { MainPage } from '@pages/main-page';
 
 export const Router: FC = () => {
   return (
-    <>
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <ProtectedRoute>
-              <MainPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='*' element={<div>NOT FOUND</div>} />
-      </Routes>
-    </>
+    <Routes>
+      <Route
+        path='/'
+        element={
+          <ProtectedRoute>
+            <MainPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route path='/login' element={<LoginPage />} />
+      <Route path='*' element={<div>NOT FOUND</div>} />
+    </Routes>
   );
 };
