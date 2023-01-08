@@ -8,8 +8,8 @@ interface IProtectedRoute {
 
 export const ProtectedRoute: FC<IProtectedRoute> = ({ children }) => {
   const location = useLocation();
-  const { user } = useContext(auth.AuthProvider);
-  const isAuthorized = Boolean(user);
+  const { userName } = useContext(auth.AuthProvider);
+  const isAuthorized = Boolean(userName);
 
   if (!isAuthorized) {
     return <Navigate to='/login' state={{ from: location }} />;

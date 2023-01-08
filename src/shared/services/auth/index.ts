@@ -2,23 +2,24 @@ import { createContext, useState } from 'react';
 import { loginWithEmail, logout } from '@shared/api/firebase';
 
 interface Auth {
-  user: string | null;
+  userName: string | null;
   signIn: (email: string, password: string) => void;
   signOut: () => void;
 }
 const AuthProvider = createContext<Auth>({
-  user: null,
+  userName: null,
   signIn: () => {},
   signOut: () => {},
 });
 
 const useAuth = () => {
-  const [user, setUser] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
   const signIn = async (email: string, password: string) => {
-    const userData = await loginWithEmail(email, password);
+    // TODO show error
+    const { user, errorCode } = await loginWithEmail(email, password);
 
-    if (userData) {
-      setUser(userData);
+    if (user) {
+      setUserName(user);
     }
   };
 
@@ -26,12 +27,12 @@ const useAuth = () => {
     const success = await logout();
 
     if (success) {
-      setUser(null);
+      setUserName(null);
     }
   };
 
   return {
-    user,
+    userName,
     signIn,
     signOut,
   };

@@ -1,50 +1,38 @@
-import { useFormik } from 'formik';
-import { useContext, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { auth } from '@shared/services';
-import { initialValues, validationSchema } from './config';
+import { Button, Stack } from '@mui/material';
+import { TextInput, PasswordInput } from './ui';
+import { useLoginPage } from './useLoginPage';
 
 export const LoginPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const fromPage = location.state?.from?.pathname || '/';
-
-  const { user, signIn } = useContext(auth.AuthProvider);
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: ({ email, password }) => {
-      signIn(email, password);
-    },
-  });
-  const { handleSubmit, values, handleChange } = formik;
-
-  useEffect(() => {
-    if (user) {
-      navigate(fromPage);
-    }
-  }, [user]);
+  const { handleChange, handleSubmit, values, touched, errors } =
+    useLoginPage();
 
   return (
-    <div>
-      {user || 'out of user'}
-      <form onSubmit={handleSubmit}>
-        <input
-          type='email'
+    <form onSubmit={handleSubmit} style={{ width: '40%' }}>
+      <Stack justifyContent='center' alignItems='center' width='50%'>
+        <TextInput
           value={values.email}
-          onChange={handleChange}
-          name='email'
-          autoComplete='current-email'
+          fieldName='email'
+          labelName='e-mail'
+          title='enter your email'
+          error={errors.email || ''}
+          hasError={!!(errors.email && touched.email)}
+          changeFn={handleChange}
+          required
         />
-        <input
-          type='password'
+        <PasswordInput
           value={values.password}
-          onChange={handleChange}
-          name='password'
-          autoComplete='current-password'
+          fieldName='password'
+          labelName='Пароль'
+          title='A-Z a-z 0-9 , ! ; _ - @ $'
+          error={errors.password || ''}
+          hasError={!!(errors.password && touched.password)}
+          changeFn={handleChange}
+          required
         />
-        <button type='submit'>Login</button>
-      </form>
-    </div>
+        <Button variant='contained' type='submit'>
+          Login
+        </Button>
+      </Stack>
+    </form>
   );
 };

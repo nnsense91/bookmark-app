@@ -1,4 +1,9 @@
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  AuthError,
+} from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
@@ -16,9 +21,15 @@ const loginWithEmail = async (email: string, password: string) => {
   try {
     const data = await signInWithEmailAndPassword(auth, email, password);
 
-    return data.user.email;
-  } catch (e) {
-    console.error(e);
+    return {
+      user: data.user.email,
+    };
+  } catch (error) {
+    const firebaseError = error as AuthError;
+
+    return {
+      errorCode: firebaseError.code,
+    };
   }
 };
 

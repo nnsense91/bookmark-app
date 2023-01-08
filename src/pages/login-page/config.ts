@@ -1,10 +1,5 @@
 import * as Yup from 'yup';
 
-interface FormikFieldTypes {
-  email: string;
-  password: string;
-}
-
 const initialValues = {
   email: '',
   password: '',
