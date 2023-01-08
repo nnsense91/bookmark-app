@@ -1,4 +1,4 @@
-module.exports = {
+{
     "env": {
         "browser": true,
         "es2021": true
@@ -7,7 +7,8 @@ module.exports = {
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "@feature-sliced"
+        "@feature-sliced",
+        "prettier"
     ],
     "overrides": [
     ],
@@ -25,9 +26,9 @@ module.exports = {
     },
     "plugins": [
         "react",
-        "@typescript-eslint",
-        "import"
+        "@typescript-eslint"
     ],
     "rules": {
+        "react/react-in-jsx-scope": "off"
     }
 }
