@@ -1,12 +1,14 @@
 import './styles/normalize.css';
 import { FC } from 'react';
-import { MainPage, LoginPage } from '@pages';
-export const App: FC = () => {
+import { withProviders } from '@app/providers';
+import { Router } from '@processes/router';
+
+const App: FC = () => {
   return (
     <div className='App'>
-      APP
-      <MainPage />
-      <LoginPage />
+      <Router />
     </div>
   );
 };
+
+export default withProviders(App);
