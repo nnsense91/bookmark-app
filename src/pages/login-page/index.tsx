@@ -7,7 +7,10 @@ export const LoginPage = () => {
     useLoginPage();
 
   return (
-    <form onSubmit={handleSubmit} style={{ width: '40%' }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{ width: '40%', display: 'flex', justifyContent: 'center' }}
+    >
       <Stack justifyContent='center' alignItems='center' width='50%'>
         <TextInput
           value={values.email}

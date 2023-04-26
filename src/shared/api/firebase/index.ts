@@ -4,6 +4,7 @@ import {
   signOut,
   AuthError,
 } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
@@ -17,6 +18,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 const loginWithEmail = async (email: string, password: string) => {
   try {
     const data = await signInWithEmailAndPassword(auth, email, password);
@@ -43,4 +45,4 @@ const logout = async () => {
   }
 };
 
-export { auth, loginWithEmail, logout };
+export { auth, loginWithEmail, logout, db };

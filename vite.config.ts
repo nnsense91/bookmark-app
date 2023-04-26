@@ -16,4 +16,13 @@ export default defineConfig({
       '@app': path.resolve(__dirname, './src/app'),
     },
   },
+  optimizeDeps: {
+    exclude: [
+      'firebase',
+      'firebase/app',
+      'firebase/auth',
+      'firebase/firestore',
+      'firebase/analytics',
+    ],
+  },
 });
